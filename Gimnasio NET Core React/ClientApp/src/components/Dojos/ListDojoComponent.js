@@ -1,6 +1,6 @@
 // Import necessary dependencies from React and Axios
 import React, { useState, useEffect } from 'react';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 // Define the base URL and endpoint for the API
 const API_BASE_URL = 'https://localhost/gymapi/api/';
@@ -10,26 +10,6 @@ const apiEndpointDojo = `${API_BASE_URL}dojo/`;
 const pageSize = 9;
 const maxPageNumbers = 5;
 
-// Define the structure of the Dojo object
-interface Dojo {
-    id: number;
-    name: string;
-    instructorName: string;
-    instructorPhone: string;
-    dojoPhone: string;
-    shortAddress: string;
-    remarks: string;
-    provinceId: number;
-    localityId: number;
-}
-
-// Define the structure of the pagination details
-interface PaginationDetails {
-    CurrentPage: number;
-    TotalPages: number;
-    PageSize: number;
-    TotalCount: number;
-}
 
 // Define the functional component
 const ListDojoComponent = () => {
@@ -40,10 +20,10 @@ const ListDojoComponent = () => {
     const [totalItems, setTotalItems] = useState(0);
 
     // Function to fetch data based on the page number
-    const fetchData = async (pageNumber: number) => {
+    const fetchData = async (pageNumber) => {
         try {
             // Make an Axios GET request to the API endpoint with pagination parameters
-            const response: AxiosResponse<{ data: Dojo[] }> = await axios.get(apiEndpointDojo, {
+            const response = await axios.get(apiEndpointDojo, {
                 params: { pageNumber, pageSize },
             });
 
@@ -53,7 +33,7 @@ const ListDojoComponent = () => {
             // Check if the "X-Pagination" header is present in the response
             if ('x-pagination' in response.headers) {
                 // Parse the pagination details from the header and update the state
-                const paginationDetails: PaginationDetails = JSON.parse(response.headers['x-pagination']);
+                const paginationDetails = JSON.parse(response.headers['x-pagination']);
                 setTotalItems(paginationDetails.TotalCount);
             } else {
                 // Log an error if the "X-Pagination" header is not found
@@ -126,8 +106,8 @@ const ListDojoComponent = () => {
                             <td>{dojo.dojoPhone}</td>
                             <td>{dojo.shortAddress}</td>
                             <td>{dojo.remarks}</td>
-                            <td>{dojo.provinceId}</td>
-                            <td>{dojo.localityId}</td>
+                            <td>{dojo.Province ? dojo.Province.description : 'N/A'}</td>
+                            <td>{dojo.Locality ? dojo.Locality.description : 'N/A'}</td>
                         </tr>
                     ))}
                 </tbody>
