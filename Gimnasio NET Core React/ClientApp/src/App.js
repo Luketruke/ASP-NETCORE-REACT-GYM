@@ -5,7 +5,8 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import Fighters from './pages/Fighters/Fighters';
-import Dojos from './pages/Dojos/Dojos';
+import NewDojoPage from './pages/Dojos/NewDojoPage';
+import ModifyDojoPage from './pages/Dojos/ModifyDojoPage';
 
 import './custom.css'
 
@@ -16,9 +17,16 @@ export default class App extends Component {
         return (
             <Layout>
                 <Route exact path='/' component={Home} />
+
+
+                {/*Dojos*/}
+                <Route path='/dojo/new' component={NewDojoPage} />
+                <Route path='/dojo/modify/:id' component={ModifyDojoPage} />
+                {/*Dojos*/}
+
+
                 <Route path='/counter' component={Counter} />
                 <Route path='/fighterscrud' component={Fighters} />
-                <Route path='/dojoscrud' component={Dojos} />
                 <Route path='/fetch-data' component={FetchData} />
             </Layout>
         );

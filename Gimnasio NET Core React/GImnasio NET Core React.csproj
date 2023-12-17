@@ -27,12 +27,10 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\components\Fights\" />
-    <Folder Include="ClientApp\src\components\Dojos\" />
     <Folder Include="ClientApp\src\components\Login\" />
     <Folder Include="ClientApp\src\components\Events\" />
     <Folder Include="ClientApp\src\components\Ranking\" />
     <Folder Include="ClientApp\src\components\Users\" />
-    <Folder Include="ClientApp\src\pages\Dojos\" />
     <Folder Include="ClientApp\src\pages\Events\" />
     <Folder Include="ClientApp\src\pages\Fights\" />
     <Folder Include="ClientApp\src\pages\Login\" />

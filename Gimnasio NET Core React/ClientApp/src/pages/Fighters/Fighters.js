@@ -1,7 +1,6 @@
 // src/pages/Fighters/Fighters.js
 import React from 'react';
-import FightersCRUD from '../../components/Fighters/FightersCRUD'; // Adjust the path based on your folder structure
-
+import FightersCRUD from '../../components/Fighters/FightersCRUD';
 function Fighters() {
     return (
         <div>

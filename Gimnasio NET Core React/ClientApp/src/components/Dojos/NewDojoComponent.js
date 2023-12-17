@@ -1,9 +1,13 @@
 /* eslint-disable eqeqeq */
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-const DojosCRUD = () => {
-    const [, setDojos] = useState([]);
+const API_BASE_URL = 'https://localhost/gymapi/api/';
+const apiEndpointAddress = `${API_BASE_URL}address/`;
+const apiEndpointDojo = `${API_BASE_URL}dojo/`;
+
+const NewDojoComponent = () => {
     const [name, setName] = useState('');
     const [professor, setProfessor] = useState('');
     const [professorPhone, setProfessorPhone] = useState('');
@@ -23,20 +27,7 @@ const DojosCRUD = () => {
     const [addressError, setAddressError] = useState('');
     const [provinceError, setProvinceError] = useState('');
     const [localityError, setLocalityError] = useState('');
-
-    // Fetch dojos data from the API
-    const fetchData = async (source) => {
-        try {
-            const response = await axios.get('https://localhost/gymapi/api/dojo', {
-                cancelToken: source.token,
-            });
-            setDojos(response.data.data);
-        } catch (error) {
-            if (!axios.isCancel(error)) {
-                console.error('Error fetching dojos:', error);
-            }
-        }
-    };
+    const history = useHistory();
 
     useEffect(() => {
         let source = axios.CancelToken.source();
@@ -44,15 +35,12 @@ const DojosCRUD = () => {
         // Fetch provinces and localities data from the API
         const fetchProvincesAndLocalities = async () => {
             try {
-                const provincesResponse = await axios.get('https://localhost/gymapi/api/address/getprovinces', {
+                const provincesResponse = await axios.get(`${apiEndpointAddress}getprovinces`, {
                     cancelToken: source.token,
                 });
-                const localitiesResponse = await axios.get('https://localhost/gymapi/api/address/getlocalities', {
+                const localitiesResponse = await axios.get(`${apiEndpointAddress}getlocalities`, {
                     cancelToken: source.token,
                 });
-
-                console.log('Provinces response:', provincesResponse.data.data);
-                console.log('Localities response:', localitiesResponse.data.data);
 
                 setProvinces(provincesResponse.data.data);
                 setAllLocalities(localitiesResponse.data.data); // Store all localities unfiltered
@@ -62,8 +50,6 @@ const DojosCRUD = () => {
                 }
             }
         };
-
-        fetchData(source);
         fetchProvincesAndLocalities();
 
         return () => {
@@ -73,14 +59,11 @@ const DojosCRUD = () => {
 
     // Handle change in selected province
     const handleProvinceChange = (selectedProvinceId) => {
-        console.log('Selected Province:', selectedProvinceId);
-        console.log('All localities before filter:', allLocalities);
 
         // Filter localities based on the selected province
         const filteredLocalities = allLocalities.filter(locality => {
             return locality.provinceId == selectedProvinceId;
         });
-        console.log('Filtered Localities:', filteredLocalities);
 
         setFilteredLocalities(filteredLocalities);
         setSelectedProvinceId(selectedProvinceId);
@@ -101,19 +84,9 @@ const DojosCRUD = () => {
         }
 
         try {
-            console.log('Adding dojo...');
-            console.log('Name:', name);
-            console.log('Address:', address);
-            console.log('Professor:', professor);
-            console.log('Professor\'s Phone:', professorPhone);
-            console.log('Team\'s Phone:', teamPhone);
-            console.log('Remarks:', remarks);
-            console.log('Selected Province:', selectedProvinceId);
-            console.log('Selected Locality:', selectedLocalityId);
-
             // Send data to the API to add a new dojo
             const response = await axios.post(
-                'https://localhost/gymapi/api/dojo',
+                `${apiEndpointDojo}`,
                 {
                     name,
                     shortAddress: address,
@@ -123,7 +96,8 @@ const DojosCRUD = () => {
                     dojoPhone: teamPhone,
                     remarks: remarks,
                     provinceId: selectedProvinceId,
-                    localityId: selectedLocalityId
+                    localityId: selectedLocalityId,
+                    status : 1
                 },
                 {
                     headers: {
@@ -131,11 +105,11 @@ const DojosCRUD = () => {
                     },
                 }
             );
-
             console.log('API Response:', response.data);
 
+            // Clear the form fields and redirect to the index page
             clearForm();
-            fetchData(); // Update the list of dojos after adding
+            history.push('/index');
         } catch (error) {
             console.error('Error adding the dojo:', error);
         }
@@ -177,7 +151,7 @@ const DojosCRUD = () => {
 
     return (
         <div className="container mt-5">
-            <h1>Dojos CRUD</h1>
+            <h1>NEW DOJO</h1>
             <div className="row">
                 <div className="col-md-6">
                     <form onSubmit={handleAddClick}>
@@ -210,7 +184,7 @@ const DojosCRUD = () => {
                             <label className="form-label">Province:</label>
                             <select className="form-control" onChange={(e) => handleProvinceChange(e.target.value)}>
                                 <option value="">Select Province</option>
-                                {Array.isArray(provinces) && provinces.map((province) => (
+                                {provinces && provinces.map((province) => (
                                     <option key={province.id} value={province.id}>
                                         {province.description}
                                     </option>
@@ -247,4 +221,4 @@ const DojosCRUD = () => {
     );
 };
 
-export default DojosCRUD;
+export default NewDojoComponent;
