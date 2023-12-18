@@ -106,9 +106,11 @@ const ListDojoComponent = () => {
                             <td>{dojo.dojoPhone}</td>
                             <td>{dojo.shortAddress}</td>
                             <td>{dojo.remarks}</td>
-                            <td>{dojo.Province ? dojo.Province.description : 'N/A'}</td>
-                            <td>{dojo.Locality ? dojo.Locality.description : 'N/A'}</td>
+                            <td>{dojo.provinceName}</td>
+                            <td>{dojo.localityName}</td>
+                            <td>{console.log(dojo)}</td>
                         </tr>
+
                     ))}
                 </tbody>
             </table>
