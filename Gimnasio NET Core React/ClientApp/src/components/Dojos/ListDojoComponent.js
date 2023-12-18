@@ -1,6 +1,7 @@
 // Import necessary dependencies from React and Axios
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 // Define the base URL and endpoint for the API
 const API_BASE_URL = 'https://localhost/gymapi/api/';
@@ -10,7 +11,6 @@ const apiEndpointDojo = `${API_BASE_URL}dojo/`;
 const pageSize = 9;
 const maxPageNumbers = 5;
 
-
 // Define the functional component
 const ListDojoComponent = () => {
     // State variables to manage the list of dojos, current page, loading state, and total items
@@ -18,6 +18,7 @@ const ListDojoComponent = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
     const [totalItems, setTotalItems] = useState(0);
+    const history = useHistory();
 
     // Function to fetch data based on the page number
     const fetchData = async (pageNumber) => {
@@ -64,6 +65,10 @@ const ListDojoComponent = () => {
         fetchData(currentPage - 1);
     };
 
+    const handleModify = (id) => {
+        history.push(`/dojos/modify/${id}`);
+    };
+
     const generatePageNumbers = () => {
         const totalPages = Math.ceil(totalItems / pageSize);
         const pageNumbers = [];
@@ -95,6 +100,7 @@ const ListDojoComponent = () => {
                         <th>Remarks</th>
                         <th>Province</th>
                         <th>Locality</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -108,7 +114,9 @@ const ListDojoComponent = () => {
                             <td>{dojo.remarks}</td>
                             <td>{dojo.provinceName}</td>
                             <td>{dojo.localityName}</td>
-                            <td>{console.log(dojo)}</td>
+                            <td>
+                                <button onClick={() => handleModify(dojo.id)}>Modify</button>
+                            </td>
                         </tr>
 
                     ))}
