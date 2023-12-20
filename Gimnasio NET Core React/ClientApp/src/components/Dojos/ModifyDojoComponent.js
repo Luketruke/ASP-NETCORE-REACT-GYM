@@ -177,6 +177,10 @@ const ModifyDojoComponent = ({ match }) => {
         setLocalityError('');
     };
 
+    const handleCancel = () => {
+        history.push(`/dojos/list/`);
+    };
+
     return (
         <div className="container mt-5">
             <h1>MODIFY DOJO</h1>
@@ -242,6 +246,7 @@ const ModifyDojoComponent = ({ match }) => {
                             <textarea className="form-control" value={remarks} onChange={(e) => setRemarks(e.target.value)} rows="5" />
                         </div>
                         <button type="submit" className="btn btn-success">Modify</button>
+                        <button type="submit" onClick={() => handleCancel()} className="btn btn-danger">Cancel</button>
                     </form>
                 </div>
             </div>

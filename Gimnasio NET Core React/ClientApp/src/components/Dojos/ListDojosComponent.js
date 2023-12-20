@@ -7,7 +7,7 @@ const apiEndpointDojo = `${API_BASE_URL}dojo/`;
 const pageSize = 9;
 const maxPageNumbers = 5;
 
-const ListDojoComponent = () => {
+const ListDojosComponent = () => {
     const [dojos, setDojos] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
@@ -57,6 +57,10 @@ const ListDojoComponent = () => {
         setSelectedDojoId(id);
     };
 
+    const handleAddDojo = () => {
+        history.push(`/dojos/add/`);
+    };
+
     // Delete the selected dojo and reset the selectedDojoId state
     const handleConfirmDelete = async () => {
         try {
@@ -93,7 +97,8 @@ const ListDojoComponent = () => {
     return (
         <div>
             <h1>Dojo List</h1>
-            <table className="table table-striped">
+            <button type="submit" onClick={() => handleAddDojo()} className="btn btn-success">Add Dojo</button>
+            <table className="table table-bordered">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -191,4 +196,4 @@ const ListDojoComponent = () => {
     );
 };
 
-export default ListDojoComponent;
+export default ListDojosComponent;

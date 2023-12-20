@@ -32,6 +32,7 @@
     <Folder Include="ClientApp\src\components\Ranking\" />
     <Folder Include="ClientApp\src\components\Users\" />
     <Folder Include="ClientApp\src\pages\Events\" />
+    <Folder Include="ClientApp\src\pages\Fighters\" />
     <Folder Include="ClientApp\src\pages\Fights\" />
     <Folder Include="ClientApp\src\pages\Login\" />
     <Folder Include="ClientApp\src\pages\Ranking\" />

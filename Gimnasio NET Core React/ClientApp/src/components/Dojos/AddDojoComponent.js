@@ -7,7 +7,7 @@ const API_BASE_URL = 'https://localhost/gymapi/api/';
 const apiEndpointAddress = `${API_BASE_URL}address/`;
 const apiEndpointDojo = `${API_BASE_URL}dojo/`;
 
-const NewDojoComponent = () => {
+const AddDojoComponent = () => {
     const [name, setName] = useState('');
     const [professor, setProfessor] = useState('');
     const [professorPhone, setProfessorPhone] = useState('');
@@ -149,6 +149,10 @@ const NewDojoComponent = () => {
         setLocalityError('');
     };
 
+    const handleCancel = () => {
+        history.push(`/dojos/list/`);
+    };
+
     return (
         <div className="container mt-5">
             <h1>NEW DOJO</h1>
@@ -214,6 +218,7 @@ const NewDojoComponent = () => {
                             <textarea className="form-control" value={remarks} onChange={(e) => setRemarks(e.target.value)} rows="5" />
                         </div>
                         <button type="submit" className="btn btn-success">Add</button>
+                        <button type="submit" onClick={() => handleCancel()} className="btn btn-danger">Cancel</button>
                     </form>
                 </div>
             </div>
@@ -221,4 +226,4 @@ const NewDojoComponent = () => {
     );
 };
 
-export default NewDojoComponent;
+export default AddDojoComponent;
