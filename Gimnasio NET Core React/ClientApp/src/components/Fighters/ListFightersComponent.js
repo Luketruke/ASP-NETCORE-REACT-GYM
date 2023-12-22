@@ -101,28 +101,24 @@ const ListFightersComponent = () => {
             <table className="table table-bordered">
                 <thead>
                     <tr>
-                        {/*<th>Name</th>*/}
-                        {/*<th>Instructor</th>*/}
-                        {/*<th>Instructor's Phone</th>*/}
-                        {/*<th>Team's Phone</th>*/}
-                        {/*<th>Address</th>*/}
-                        {/*<th>Remarks</th>*/}
-                        {/*<th>Province</th>*/}
-                        {/*<th>Locality</th>*/}
-                        {/*<th>Actions</th>*/}
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Category</th>
+                        <th>Modality</th>
+                        <th>NIC</th>
+                        <th>Remarks</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {fighters.map((fighter) => (
                         <tr key={fighter.id}>
-                            {/*<td>{dojo.name}</td>*/}
-                            {/*<td>{dojo.instructorName}</td>*/}
-                            {/*<td>{dojo.instructorPhone}</td>*/}
-                            {/*<td>{dojo.dojoPhone}</td>*/}
-                            {/*<td>{dojo.shortAddress}</td>*/}
-                            {/*<td>{dojo.remarks}</td>*/}
-                            {/*<td>{dojo.provinceName}</td>*/}
-                            {/*<td>{dojo.localityName}</td>*/}
+                            <td>{fighter.firstName}</td>
+                            <td>{fighter.lastName}</td>
+                            <td>{fighter.category}</td>
+                            <td>{fighter.modality}</td>
+                            <td>{fighter.nic}</td>
+                            <td>{fighter.remarks}</td>
                             <td>
                                 <button
                                     className="btn btn-primary mr-2"
