@@ -137,7 +137,7 @@ const ModifyDojoComponent = ({ match }) => {
 
             // Clear the form fields and redirect to the index page
             clearForm();
-            history.push('/index');
+            history.push('/dojos/list');
         } catch (error) {
             console.error('Error modifying the dojo:', error);
         }

@@ -96,8 +96,7 @@ const AddDojoComponent = () => {
                     dojoPhone: teamPhone,
                     remarks: remarks,
                     provinceId: selectedProvinceId,
-                    localityId: selectedLocalityId,
-                    status : 1
+                    localityId: selectedLocalityId
                 },
                 {
                     headers: {

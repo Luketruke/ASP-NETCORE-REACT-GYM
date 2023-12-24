@@ -7,8 +7,8 @@ import { Counter } from './components/Counter';
 import AddDojoPage from './pages/Dojos/AddDojoPage';
 import ModifyDojoPage from './pages/Dojos/ModifyDojoPage';
 import ListDojosPage from './pages/Dojos/ListDojosPage';
-//import AddFighterPage from './pages/Fighters/AddFighterPage';
-//import ModifyFighterPage from './pages/Fighters/ModifyFighterPage';
+import AddFighterPage from './pages/Fighters/AddFighterPage';
+import ModifyFighterPage from './pages/Fighters/ModifyFighterPage';
 import ListFightersPage from './pages/Fighters/ListFightersPage';
 
 import './custom.css'
@@ -29,8 +29,8 @@ export default class App extends Component {
                 {/*Dojos*/}
 
                 {/*Fighters*/}
-                {/*<Route path='/fighters/add' component={AddFighterPage} />*/}
-                {/*<Route path='/fighters/modify/:id' component={ModifyFighterPage} />*/}
+                <Route path='/fighters/add' component={AddFighterPage} />
+                <Route path='/fighters/modify/:id' component={ModifyFighterPage} />
                 <Route path='/fighters/list' component={ListFightersPage} />
                 {/*Fighters*/}
 
